@@ -152,5 +152,8 @@ class PhotoMyList(ListView):
             messages.warning(request, '로그인을 먼저하세요')
             return HttpResponseRedirect('/')
         return super(PhotoMyList, self).dispatch(request, *args, **kwargs)
-
+class Profile(ListView):
+    def get(self, request):
+        user = accounts.forms.UserForm(request.GET)
+        return render(request, 'layout/base.html', {'user': user} )
 
