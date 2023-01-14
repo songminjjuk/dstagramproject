@@ -31,16 +31,16 @@
 <div class="row" style="display: flex; flex-direction: row;text-align: center; justify-content: center;padding-top: 60px; background-color:#FAFAFA">
     <div class="col-xs-6 col-md-3" style="padding: 20px 60px">
         <div class="box" style="width: 175px; height: 175px;">
-            <img class="round" src="{% static 'images/bu-k.jpg' %}" width="200"> <br>
+            <img src="C:\Users\User\dstagramproject-master\media\static\images\KakaoTalk_20230109_163858130.jpg">
         </div>
+
     </div>
     <div style="text-align: left">
         <div style="display: flex; flex-direction: row; margin: 20px 0">
             <div style="font-size: 26px; margin-right: 40px">
                 {{ request.user }}
             </div>
-            <button id="button_profile_upload" style="margin-right: 40px"> 프로필 사진 편집</button>
-
+            <a href="{% url 'photo:profile_update' %}"><button id="button_profile_upload" style="margin-right: 40px"> 프로필 사진 편집</button></a>
         </div>
         <div style="margin-bottom: 20px">
             게시물 내 게시물건수  팔로워 111 팔로잉 111
