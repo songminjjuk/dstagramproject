@@ -45,8 +45,25 @@
         <div style="margin-bottom: 20px">
             게시물 내 게시물건수  팔로워 111 팔로잉 111
         </div>
-
     </div>
+   <div class="col-md-12">
+       <div id="mdb-lightbox-ui"></div>
+       <div class="mdb-lightbox no-margin">
+           <div class="row">
+               {% for object in object_list %}
+               {% if object.author == request.user %}
+               <figure class="col-md-4">
+                   <div style="width: 18rem;">
+                       <img src="{{object.image.url}}" class="card-img-top" alt="...">
+                   </div>
+               </figure>
+               {% endif %}
+               {% endfor %}
+           </div>
+       </div>
+   </div>
+</div>
+
 <!--    <div class="col-xs-6 col-md-3">-->
 <!--        {% if object.user == profile_user %}   &lt;!&ndash; 로그인한 사용자와 profile_user(프로필 소유자)가 일치할 때만 프로필 편집이 가능하도록 함 &ndash;&gt;-->
 <!--        <a href="#">-->
