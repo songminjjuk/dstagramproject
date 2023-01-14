@@ -1,31 +1,59 @@
 {% extends 'base.html' %}
 {% block title %}
 {% endblock %}
-
+{% load static %}
 {% block content %}
-<style>
+<!--<style>-->
 
-</style>
+<!--</style>-->
+<!--<div class="row">-->
+<!--   <div class="col-md-12">-->
+<!--       <div id="mdb-lightbox-ui"></div>-->
+<!--       <div class="mdb-lightbox no-margin">-->
+<!--           <div class="row">-->
+<!--               {% for object in object_list %}-->
+<!--               {% if object.author == request.user %}-->
+<!--               <figure class="col-md-4">-->
+<!--                   <div style="width: 18rem;">-->
+<!--                       <img src="{{object.image.url}}" class="card-img-top" alt="...">-->
+<!--                   </div>-->
+<!--               </figure>-->
+<!--               {% endif %}-->
+<!--               {% endfor %}-->
+<!--           </div>-->
+<!--       </div>-->
+<!--       <div class="col"></div>-->
+<!--   </div>-->
+<!--</div>-->
+<div>z</div>
+<div>z</div>
 
-<div class="row">
-   <div class="col-md-12">
-       <div id="mdb-lightbox-ui"></div>
-       <div class="mdb-lightbox no-margin">
-           <div class="row">
-               {% for object in object_list %}
-               {% if object.author == request.user %}
-               <figure class="col-md-4">
-                   <div style="width: 18rem;">
-                       <img src="{{object.image.url}}" class="card-img-top" alt="...">
-                   </div>
-               </figure>
-               {% endif %}
-               {% endfor %}
-           </div>
-       </div>
-       <div class="col"></div>
-   </div>
+<div class="row" style="display: flex; flex-direction: row;text-align: center; justify-content: center;padding-top: 60px; background-color:#FAFAFA">
+    <div class="col-xs-6 col-md-3" style="padding: 20px 60px">
+        <div class="box" style="width: 175px; height: 175px;">
+            <img class="round" src="{% static 'images/bu-k.jpg' %}" width="200"> <br>
+        </div>
+    </div>
+    <div style="text-align: left">
+        <div style="display: flex; flex-direction: row; margin: 20px 0">
+            <div style="font-size: 26px; margin-right: 40px">
+                {{ request.user }}
+            </div>
+            <button id="button_profile_upload" style="margin-right: 40px"> 프로필 사진 편집</button>
+
+        </div>
+        <div style="margin-bottom: 20px">
+            게시물 내 게시물건수  팔로워 111 팔로잉 111
+        </div>
+
+    </div>
+<!--    <div class="col-xs-6 col-md-3">-->
+<!--        {% if object.user == profile_user %}   &lt;!&ndash; 로그인한 사용자와 profile_user(프로필 소유자)가 일치할 때만 프로필 편집이 가능하도록 함 &ndash;&gt;-->
+<!--        <a href="#">-->
+<!--            <button type="button" class="btn btn-default">프로필 편집</button></a></h2>-->
+<!--        {% endif %}-->
+<!--        <h3> username: {{request.user}} <br></h3>-->
+<!--    </div>-->
 </div>
-
 {% endblock %}
 
