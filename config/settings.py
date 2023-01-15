@@ -129,7 +129,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 MEDIA_URL = '/res/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'photo/static/images') # media
 
 LOGIN_REDIRECT_URL = '/'
 
