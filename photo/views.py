@@ -18,6 +18,7 @@ from django.views import View
 from django.http import JsonResponse
 from .models import Comment
 
+
 class PhotoList(ListView):
     model = Photo
     template_name_suffix = '_list'
@@ -25,7 +26,7 @@ class PhotoList(ListView):
 
 class PhotoCreate(CreateView):
     model = Photo
-    fields = ['author','text', 'image']
+    fields = ['author', 'text', 'image']
     template_name_suffix = '_create'
     success_url = '/'
 
@@ -41,12 +42,11 @@ class PhotoCreate(CreateView):
             return self.render_to_response({'form': form})
 
 
-
-
 class PhotoUpdate(UpdateView):
     model = Photo
-    fields = ['author','text', 'image']
+    fields = ['author', 'text', 'image']
     template_name_suffix = '_update'
+
     # success_url = '/'
 
     def dispatch(self, request, *args, **kwargs):
@@ -56,6 +56,7 @@ class PhotoUpdate(UpdateView):
             return HttpResponseRedirect('/')
         else:
             return super(PhotoUpdate, self).dispatch(request, *args, **kwargs)
+
 
 class PhotoDelete(DeleteView):
     model = Photo
@@ -83,7 +84,7 @@ from urllib.parse import urlparse
 
 class PhotoLike(View):
     def get(self, request, *args, **kwargs):
-        if not request.user.is_authenticated:    #로그인확인
+        if not request.user.is_authenticated:  # 로그인확인
             return HttpResponseForbidden()
         else:
             if 'photo_id' in kwargs:
@@ -101,7 +102,7 @@ class PhotoLike(View):
 
 class PhotoFavorite(View):
     def get(self, request, *args, **kwargs):
-        if not request.user.is_authenticated:    #로그인확인
+        if not request.user.is_authenticated:  # 로그인확인
             return HttpResponseForbidden()
         else:
             if 'photo_id' in kwargs:
@@ -167,7 +168,8 @@ class Profile(DetailView):
     model = User
     template_name = 'photo/photo_mylist.html'
 
-class ProfileUpdateView(View): # 간단한 View클래스를 상속 받았으므로 get함수와 post함수를 각각 만들어줘야한다.
+
+class ProfileUpdateView(View):  # 간단한 View클래스를 상속 받았으므로 get함수와 post함수를 각각 만들어줘야한다.
     # 프로필 편집에서 보여주기위한 get 메소드
     def get(self, request):
         user = get_object_or_404(User, pk=request.user.pk)  # 로그인중인 사용자 객체를 얻어옴
@@ -202,21 +204,23 @@ class ProfileUpdateView(View): # 간단한 View클래스를 상속 받았으므�
 
         return redirect('/', pk=request.user.pk)  # 수정된 화면 보여주기
 
+
 def comment_write(request, board_id):
-    comment_write = CommentForm(request.POST)
-    user_id = request.session['user']
-    user = User.objects.get(pk=user_id)
-    if comment_write.is_valid():
-        comments = comment_write.save(commit=False)
-        comments.post = get_object_or_404(Photo, pk=board_id)
-        comments.user = user
-        comments.content = request.POST['body']
-        comments.created_at = timezone.now()
+    article = get_object_or_404(Photo, pk=board_id)
+    comments = CommentForm(request.POST)
+    # user_id = request.session['user']
+    # user = User.objects.get(pk=user_id)
+    if comments.is_valid():
+        comments.author_id = request.user.id
+        comments.comment = comment_write.save(commit=False)
+        comments.post_id = article
         comments.save()
-    return redirect('board_detail', board_id)
+
+        return redirect('/', board_id)
+    return redirect('/', board_id)
 
 def board_detail(request, pk):
     board = get_object_or_404(Photo, pk=pk)
     comments = CommentForm()
     comment_view = Comment.objects.filter(post=pk)
-    return render(request, 'board_detail.html',{'board':board, 'comments':comments, 'comment_view':comment_view})
+    return render(request, '/', {'board': board, 'comments': comments, 'comment_view': comment_view})
