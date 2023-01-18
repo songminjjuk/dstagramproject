@@ -3,7 +3,8 @@
 {% endblock %}
 
 {% block content %}
-
+<div>Zz</div>
+<div>Zz</div>
 <div class='container'>
     <div class="row">
         <div class="col"></div>
@@ -31,7 +32,7 @@
                     </li>
                     <li class="list-group-item">생성일 : {{ object.created }}</li>
                 </ul>
-                <div style="margin: 0 20px;text-align: left;font-size: 14px"> 춘식이 <b>외 {{ object.like.all.count }}명</b>이
+                <div style="margin: 0 20px;text-align: left;font-size: 14px"> minseok <b>외 {{ object.like.all.count }}명</b>이
                     좋아합니다.
                 </div>
 <!--                <div style="margin: 0 20px;text-align: left;font-size: 16px">-->
@@ -44,30 +45,24 @@
 <!--                    {% endfor %}-->
 <!--                </div> &lt;!&ndash;- 요기가 댓글보이는 거 -&ndash;&gt;-->
                 <div style="display:flex;flex-direction: row;align-items: center; border-top: solid 1px gray ">
-<!--                    <input id="reply_{{ object.id }}" type="text" class="form-control"-->
-<!--                           style="box-shadow: none; border: none; outline: none"-->
-<!--                           placeholder="댓글 달기..">-->
-<!--                    <div feed_id="{{ object.id }}" class="upload_reply"-->
-<!--                         style="width: 50px;color: cornflowerblue; font-weight: bold">-->
-<!--                        게시-->
-<!--                    </div>-->
+                    <form method="POST" action="{% url 'photo:comment_write' object.id %}">
+                        {% csrf_token %}
+                        <input id="reply_{{ object.id }}" type="text" class="form-control"
+                               style="box-shadow: none; border: none; outline: none"
+                               placeholder="댓글 달기..">
+                    </form>
+<!--                        <div feed_id="{{ object.id }}" class="upload_reply"-->
+<!--                             style="width: 50px;color: cornflowerblue; font-weight: bold">-->
+<!--                            게시-->
+<!--                        </div>-->
                     {% for comment in comments %}
-                    <hr>
-                    <p>{{ comment.author }}</p>
-                    <p>{{ comment.comment }}</p>
-                    <hr>
-                {% endfor %}
+                        <p>{{ comment.author }}</p>
+                        <p>{{ comment.comment }}</p>
+                    {% endfor %}
                 </div>
-                <form method="POST" action="{% url 'photo:comment_write' object.id %}">
-                    {% csrf_token %}
-                    <input type="text" value="댓글 입력">
-                    <input class="btn btn-warning" type="submit" value="댓글달기">
-                </form>
 <!--                <div class="card-body">-->
-<!--                    <a href="{% url 'photo:detail' object.id %}" class="card-link">댓글달기</a>-->
 <!--                    <a href="{% url 'photo:update' object.id %}" class="card-link">수정하기</a>-->
 <!--                    <a href="{% url 'photo:delete' object.id %}" class="card-link">삭제하기</a>-->
-
 <!--                </div>-->
 
             </div>
@@ -86,9 +81,9 @@
 <!--                    <a href="{% url 'photo:mylist' %}" class="btn btn-primary">회원님의 스토리 이동 </a>-->
 <!--                </div>-->
 <!--            </div>-->
-            <div style="display: flex;flex-direction: row; align-items: center; margin: 20px; padding-top: 50px">
+            <div style="display: flex;flex-direction: row; align-items: center; margin: 20px; padding-top: 10px">
                 <div class="box" style="width: 70px; height: 70px">
-                    <img src="{% static 'images/bu-k.jpg' %}" class="card-img-top">
+                    <img src="{% static 'images/' %}{{user.profile.profile_photo}}" class="card-img-top">
                 </div>
                 <div style="margin-left: 10px; text-align: left">
                     <div style="font-weight: bold">
@@ -98,7 +93,6 @@
                         {{ user.email }}
                     </div>
                 </div>
-                <a href="{% url 'photo:mylist' %}" class="btn btn-primary">회원님의 스토리 이동 </a>
             </div>
 
             <div style="display: flex;flex-direction: row; justify-content: space-between">
@@ -117,10 +111,10 @@
                 </div>
                 <div style="margin-left: 10px; text-align: left">
                     <div style="font-weight: bold;font-size: 14px">
-                        aaaaaaaaaa
+                        jmin_ei
                     </div>
                     <div style="color: gray;font-size: 14px">
-                        나랑 같이 치킨 먹음
+                        dongju_99 외 11명이 팔로우합니다
                     </div>
                 </div>
             </div>
@@ -137,10 +131,10 @@
                 </div>
                 <div style="margin-left: 10px; text-align: left">
                     <div style="font-weight: bold;font-size: 14px">
-                        aaaaaaaaaa
+                        dalmin_1
                     </div>
                     <div style="color: gray;font-size: 14px">
-                        나랑 같이 치킨 먹음
+                        jae2288 외 11명이 팔로우합니다
                     </div>
                 </div>
             </div>
@@ -157,10 +151,10 @@
                 </div>
                 <div style="margin-left: 10px; text-align: left">
                     <div style="font-weight: bold;font-size: 14px">
-                        aaaaaaaaaa
+                        cxmn223
                     </div>
                     <div style="color: gray;font-size: 14px">
-                        나랑 같이 치킨 먹음
+                        회원님을 팔로우합니다
                     </div>
                 </div>
             </div>
@@ -177,10 +171,10 @@
                 </div>
                 <div style="margin-left: 10px; text-align: left">
                     <div style="font-weight: bold;font-size: 14px">
-                        aaaaaaaaaa
+                        tree_j_25
                     </div>
                     <div style="color: gray;font-size: 14px">
-                        나랑 같이 치킨 먹음
+                        회원님을 위한 추천
                     </div>
                 </div>
             </div>
@@ -197,10 +191,10 @@
                 </div>
                 <div style="margin-left: 10px; text-align: left">
                     <div style="font-weight: bold;font-size: 14px">
-                        aaaaaaaaaa
+                        jin__mong
                     </div>
                     <div style="color: gray;font-size: 14px">
-                        나랑 같이 치킨 먹음
+                        회원님을 위한 추천
                     </div>
                 </div>
             </div>
