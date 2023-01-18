@@ -31,12 +31,44 @@
                     </li>
                     <li class="list-group-item">생성일 : {{ object.created }}</li>
                 </ul>
-                <div class="card-body">
-                    <a href="{% url 'photo:detail' object.id %}" class="card-link">댓글달기</a>
-                    <a href="{% url 'photo:update' object.id %}" class="card-link">수정하기</a>
-                    <a href="{% url 'photo:delete' object.id %}" class="card-link">삭제하기</a>
-
+                <div style="margin: 0 20px;text-align: left;font-size: 14px"> 춘식이 <b>외 {{ object.like.all.count }}명</b>이
+                    좋아합니다.
                 </div>
+<!--                <div style="margin: 0 20px;text-align: left;font-size: 16px">-->
+<!--                    <b>{{ object.username }}</b> {{ object.text }}-->
+<!--                </div>-->
+<!--                <div id="reply_list_{{ feed.id }}"> &lt;!&ndash;- 요기가 댓글보이는 거 -&ndash;&gt;-->
+<!--                    {% for reply in feed.reply_list %}-->
+<!--                        <div style="margin: 0 20px;text-align: left;font-size: 14px">-->
+<!--                            <b>{{ reply.nickname }}</b> {{ reply.reply_content }}</div>-->
+<!--                    {% endfor %}-->
+<!--                </div> &lt;!&ndash;- 요기가 댓글보이는 거 -&ndash;&gt;-->
+                <div style="display:flex;flex-direction: row;align-items: center; border-top: solid 1px gray ">
+<!--                    <input id="reply_{{ object.id }}" type="text" class="form-control"-->
+<!--                           style="box-shadow: none; border: none; outline: none"-->
+<!--                           placeholder="댓글 달기..">-->
+<!--                    <div feed_id="{{ object.id }}" class="upload_reply"-->
+<!--                         style="width: 50px;color: cornflowerblue; font-weight: bold">-->
+<!--                        게시-->
+<!--                    </div>-->
+                    {% for comment in comments %}
+                    <hr>
+                    <p>{{ comment.author }}</p>
+                    <p>{{ comment.comment }}</p>
+                    <hr>
+                {% endfor %}
+                </div>
+                <form method="POST" action="{% url 'photo:comment_write' object.id %}">
+                    {% csrf_token %}
+                    <input type="text" value="댓글 입력">
+                    <input class="btn btn-warning" type="submit" value="댓글달기">
+                </form>
+<!--                <div class="card-body">-->
+<!--                    <a href="{% url 'photo:detail' object.id %}" class="card-link">댓글달기</a>-->
+<!--                    <a href="{% url 'photo:update' object.id %}" class="card-link">수정하기</a>-->
+<!--                    <a href="{% url 'photo:delete' object.id %}" class="card-link">삭제하기</a>-->
+
+<!--                </div>-->
 
             </div>
             {% endfor %}
@@ -66,7 +98,9 @@
                         {{ user.email }}
                     </div>
                 </div>
+                <a href="{% url 'photo:mylist' %}" class="btn btn-primary">회원님의 스토리 이동 </a>
             </div>
+
             <div style="display: flex;flex-direction: row; justify-content: space-between">
                 <div style="font-weight: bold; color: gray">
                     회원님을 위한 추천
@@ -183,4 +217,5 @@
         </div>
     </div>
 </div>
+
 {% endblock %}
