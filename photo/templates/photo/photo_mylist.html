@@ -4,7 +4,6 @@
 {% load static %}
 {% block content %}
 <!--<style>-->
-
 <!--</style>-->
 <!--<div class="row">-->
 <!--   <div class="col-md-12">-->
@@ -30,8 +29,8 @@
 
 <div class="row" style="display: flex; flex-direction: row;text-align: center; justify-content: center;padding-top: 60px; background-color:#FAFAFA">
     <div class="col-xs-6 col-md-3" style="padding: 20px 60px">
-        <div class="box" style="width: 175px; height: 175px;">
-            <img src="C:\Users\User\dstagramproject-master\media\static\images\KakaoTalk_20230109_163858130.jpg">
+        <div class="box" style="width: 175px; height: 225px;">
+            <img src="{% static 'images/' %}{{user.profile.profile_photo}}" width="200px"/>
         </div>
 
     </div>
@@ -54,7 +53,7 @@
                {% if object.author == request.user %}
                <figure class="col-md-4">
                    <div style="width: 18rem;">
-                       <img src="{{object.image.url}}" class="card-img-top" alt="...">
+                       <img src="{{object.image.url}}" class="card-img-top" alt="..." width="288px;" height="260px">
                    </div>
                </figure>
                {% endif %}
