@@ -1,6 +1,10 @@
+from django.conf.urls import url
+from django.contrib.auth.decorators import login_required
 from django.urls import path
+
+from accounts import views
 from .views import PhotoList, PhotoDelete, PhotoDetail, PhotoUpdate, PhotoCreate, PhotoLike, PhotoFavorite, \
-    PhotoLikeList, PhotoFavoriteList, PhotoMyList
+    PhotoLikeList, PhotoFavoriteList, PhotoMyList, ProfileUpdateView, board_detail, comment_write
 
 app_name = "photo"
 urlpatterns = [
@@ -14,6 +18,9 @@ urlpatterns = [
     path("like/", PhotoLikeList.as_view(), name="like_list"),
     path("favorite/", PhotoFavoriteList.as_view(), name="favorite_list"),
     path("", PhotoList.as_view(), name='index'),
+    path("profile_update/", ProfileUpdateView.as_view(), name='profile_update'),
+    path("comment_write/<int:board_id>/", comment_write, name='comment_write'),
+
 ]
 
 from django.conf.urls.static import static
